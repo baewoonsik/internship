@@ -22,7 +22,7 @@ export default defineComponent({
 
     created() {
         const id = this.$route.params.id as string;
-        useStore().FETCH_USER_INFO(id);
+        useStore().fetchUserInfo(id);
     },
 })
 </script>

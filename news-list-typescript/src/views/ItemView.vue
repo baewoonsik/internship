@@ -35,7 +35,7 @@ export default defineComponent({
 
     created() {
         const id = this.$route.params.id as string;
-        useStore().FETCH_DETAIL_ASK(id);
+        useStore().fetchDetailAsk(id);
     }
 })
 </script>

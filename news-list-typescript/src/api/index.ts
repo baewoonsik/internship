@@ -15,19 +15,19 @@ const fetchAskList = () => {
   return axios.get(`${config.baseURL}ask/1.json`); // axios를 이용해 baseURL과 함께 질문 리스트를 가져옵니다.
 };
 
-const fetchJobsList = async () => {
+const fetchJobsList = () => {
   // 구인 정보 리스트를 가져오는 함수입니다.
-  return await axios.get(`${config.baseURL}jobs/1.json`); // axios를 이용해 baseURL과 함께 구인 정보 리스트를 가져옵니다.
+  return axios.get(`${config.baseURL}jobs/1.json`); // axios를 이용해 baseURL과 함께 구인 정보 리스트를 가져옵니다.
 };
 
-const fetchUserInfo = async (userName: string) => {
+const fetchUserInfo = (userName: string) => {
   // 유저 정보를 가져오는 함수입니다.
-  return await axios.get(`${config.baseURL}user/${userName}.json`); // axios를 이용해 baseURL과 함께 유저 정보를 가져옵니다.
+  return axios.get(`${config.baseURL}user/${userName}.json`); // axios를 이용해 baseURL과 함께 유저 정보를 가져옵니다.
 };
 
-const fetchDetailAsk = async (askId: string) => {
+const fetchDetailAsk = (askId: string) => {
   // 질문 상세 정보를 가져오는 함수입니다.
-  return await axios.get(`${config.baseURL}item/${askId}.json`); // axios를 이용해 baseURL과 함께 질문 상세 정보를 가져옵니다.
+  return axios.get(`${config.baseURL}item/${askId}.json`); // axios를 이용해 baseURL과 함께 질문 상세 정보를 가져옵니다.
 };
 
 export {

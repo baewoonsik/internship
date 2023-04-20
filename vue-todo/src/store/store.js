@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import axios from "axios";
 
 const storage = {
   fetch() {
@@ -16,7 +15,6 @@ const storage = {
 export default createStore({
   state: {
     headerText: "TODO LIST WITH VUEX",
-    user: [],
     todoItems: storage.fetch(),
   },
 
@@ -54,23 +52,6 @@ export default createStore({
     clearTodo(state) {
       localStorage.clear();
       state.todoItems = [];
-    },
-
-    // actions practice
-    setUser(state, user) {
-      state.user = user;
-    },
-  },
-
-  // actions practice
-  actions: {
-    async setUserData(context) {
-      return await axios
-        .get("https://jsonplaceholder.typicode.com/users/1")
-        .then((response) => {
-          console.log(response.data);
-          context.commit("setUser", response.data);
-        });
     },
   },
 });

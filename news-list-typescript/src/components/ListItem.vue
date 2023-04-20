@@ -40,11 +40,11 @@ export default defineComponent({
         const name = this.$route.name
         const store = useStore()
         if (name === 'news') {
-            store.FETCH_NEWS()
+            store.fetchNews()
         } else if (name === 'ask') {
-            store.FETCH_ASKS()
+            store.fetchAsks()
         } else if (name === 'jobs') {
-            store.FETCH_JOBS()
+            store.fetchJobs()
         }
     },
 

@@ -7,67 +7,74 @@ import {
   fetchDetailAsk,
 } from "../api/index";
 
-export const useStore = defineStore("store", {
-  state: () => ({
+interface State {
+  news: Array<any>; // 뉴스 리스트
+  asks: Array<any>; // 질문 리스트
+  jobs: Array<any>; // 구인 정보 리스트
+  userInfo: any; // 사용자 정보
+  askDetail: any; // 질문 상세 정보
+}
+
+export const useStore = defineStore({
+  id: "store",
+  state: (): State => ({
     news: [],
     asks: [],
     jobs: [],
     userInfo: {},
     askDetail: {},
   }),
-
   actions: {
-    FETCH_NEWS() {
-      // 뉴스 리스트를 가져오는 API 호출
-      fetchNewsList()
-        .then((response) => {
-          //   console.log(response.data);
-          // 뉴스 리스트를 store에 저장
-          this.news = response.data;
-          console.log(this.news);
-        })
-        .catch((error) => console.log(error));
+    async fetchNews(): Promise<void> {
+      // 뉴스 리스트 가져오기
+      try {
+        // ES6의 구조 분해 할당 문법을 사용하여 리턴되는 response 객체에서 data를 추출
+        const { data } = await fetchNewsList();
+        this.news = data;
+        console.log(this.news);
+      } catch (error) {
+        console.log("Error in fetchNews:", error);
+      }
     },
-    FETCH_ASKS() {
-      // 질문 리스트를 가져오는 API 호출
-      fetchAskList()
-        .then(({ data }) => {
-          //   console.log(data);
-          // 질문 리스트를 store에 저장
-          this.asks = data;
-          console.log(this.asks);
-        })
-        .catch((error) => console.log(error));
+    async fetchAsks(): Promise<void> {
+      // 질문 리스트 가져오기
+      try {
+        const { data } = await fetchAskList();
+        this.asks = data;
+        console.log(this.asks);
+      } catch (error) {
+        console.log("Error in fetchAsks:", error);
+      }
     },
-    FETCH_JOBS() {
-      // 구인 정보 리스트를 가져오는 API 호출
-      fetchJobsList()
-        .then(({ data }) => {
-          // 구인 정보 리스트를 store에 저장
-          this.jobs = data;
-          console.log(this.jobs);
-        })
-        .catch((error) => console.log(error));
+    async fetchJobs(): Promise<void> {
+      // 구인 정보 리스트 가져오기
+      try {
+        const { data } = await fetchJobsList();
+        this.jobs = data;
+        console.log(this.jobs);
+      } catch (error) {
+        console.log("Error in fetchJobs:", error);
+      }
     },
-    FETCH_USER_INFO(name: string) {
-      // 사용자 정보를 가져오는 API 호출
-      fetchUserInfo(name)
-        .then(({ data }) => {
-          console.log(data);
-          // 사용자 정보를 store에 저장
-          this.userInfo = data;
-        })
-        .catch((error) => console.log(error));
+    async fetchUserInfo(name: string): Promise<void> {
+      // 사용자 정보 가져오기
+      try {
+        const { data } = await fetchUserInfo(name);
+        this.userInfo = data;
+        console.log(this.userInfo);
+      } catch (error) {
+        console.log(`Error in fetchUserInfo for ${name}:`, error);
+      }
     },
-    FETCH_DETAIL_ASK(askId: string) {
-      // 질문 상세 정보를 가져오는 API 호출
-      fetchDetailAsk(askId)
-        .then(({ data }) => {
-          console.log(data);
-          // 질문 상세 정보를 store에 저장
-          this.askDetail = data;
-        })
-        .catch((error) => console.log(error));
+    async fetchDetailAsk(askId: string): Promise<void> {
+      // 질문 상세 정보 가져오기
+      try {
+        const { data } = await fetchDetailAsk(askId);
+        this.askDetail = data;
+        console.log(this.askDetail);
+      } catch (error) {
+        console.log(`Error in fetchDetailAsk for ${askId}:`, error);
+      }
     },
   },
 });
